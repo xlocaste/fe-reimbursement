@@ -62,11 +62,13 @@ const AddReimbursement: React.FC = () => {
             </div>
             <div className="mb-4">
                 <label htmlFor="kategori" className="block text-sm font-semibold text-gray-600">Kategori</label>
+                <div className='items-center rounded-md'>
                 <select
                     id="kategori"
                     value={kategori}
                     onChange={(e) => setKategori(e.target.value)}
                     required
+                    className='w-full p-2 bg-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 items-center'
                     >
                         <option value="">Pilih Kategori</option>
                         <option value="transportasi">Transportasi</option>
@@ -80,6 +82,7 @@ const AddReimbursement: React.FC = () => {
                         <option value="pengiriman_logistik">Pengiriman Logistik</option>
                         <option value="lain_lain">Lain-lain</option>
                 </select>
+                </div>
             </div>
             <div className="mb-4">
                 <label htmlFor="deskripsi" className="block text-sm font-semibold text-gray-600">Deskripsi</label>

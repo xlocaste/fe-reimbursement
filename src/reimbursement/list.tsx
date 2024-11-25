@@ -8,6 +8,7 @@ import AddReimbursement from '../components/TambahReimbursement'
 type Reimbursement = {
   id: number
   tanggal: string
+  kategori: string
   deskripsi: string | null
   jumlah: number
   status: string
@@ -22,6 +23,7 @@ type Reimbursement = {
 
 const ReimbursementList: React.FC = () => {
   const [reimbursements, setReimbursements] = useState<Reimbursement[]>([])
+  const [role, setRole] = useState<string>('');
 
   useEffect(() => {
     const fetchReimbursements = async () => {
@@ -29,11 +31,12 @@ const ReimbursementList: React.FC = () => {
         if (!token) {
           return
         }
-      const response = await axios.get('http://127.0.0.1:8000/api/reimbursement', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+        const response = await axios.get('http://127.0.0.1:8000/api/reimbursement', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        setRole(response.data.role)
       setReimbursements(response.data.data)
     }
     fetchReimbursements()
@@ -50,6 +53,7 @@ const ReimbursementList: React.FC = () => {
           <tr>
             <th className="p-4">Nama</th>
             <th>Tanggal</th>
+            <th>Kategori</th>
             <th>Deskripsi</th>
             <th>Jumlah</th>
             <th>Status</th>
@@ -63,17 +67,20 @@ const ReimbursementList: React.FC = () => {
             <tr key={reimbursement.id} className="text-center">
               <td className="p-2">{reimbursement.user.name}</td>
               <td className="p-2">{reimbursement.tanggal}</td>
+              <td className="p-2">{reimbursement.kategori}</td>
               <td className="p-2">{reimbursement.deskripsi || 'Tidak Ada Deskripsi'}</td>
               <td className="p-2">{reimbursement.jumlah}</td>
               <td className="p-2">{reimbursement.status}</td>
               <td className="p-2">{reimbursement.tanggal_approval || 'Belum Di Approve'}</td>
               <td className="p-2">{reimbursement.approvalBy?.name || "Belum Di Approve"}</td>
               <td>
+              {role === 'admin' && (
                 <Link to={`/reimbursement/${reimbursement.id}`}>
                   <button className="bg-orange-500 text-white rounded-md py-2 px-4 hover:bg-orange-700">
                     <FaRegEdit />
                   </button>
                 </Link>
+              )}
               </td>
             </tr>
           ))}

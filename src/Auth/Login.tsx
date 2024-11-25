@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from "js-cookie";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -18,8 +19,7 @@ const Login: React.FC = () => {
         email,
         password,
       });
-
-      localStorage.setItem('token', response.data.token);
+      Cookies.set("token", response.data.token);
 
       navigate('/reimbursement');
     } catch (error) {
