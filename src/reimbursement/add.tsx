@@ -1,36 +1,32 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 const AddReimbursement: React.FC = () => {
-    const [tanggal, setTanggal] = useState<string>('');
-    const [kategori, setKategori] = useState<string>('');
-    const [deskripsi, setDeskripsi] = useState<string>('');
-    const [jumlah, setJumlah] = useState<number>();
-    const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [tanggal, setTanggal] = useState<string>('')
+    const [kategori, setKategori] = useState<string>('')
+    const [deskripsi, setDeskripsi] = useState<string>('')
+    const [jumlah, setJumlah] = useState<number>()
+    const [error, setError] = useState<string | null>(null)
+    const [loading, setLoading] = useState<boolean>(false)
+    const token = Cookies.get("token");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = Cookies.get('token')
+        if (!token) {
+            navigate('/');
+        }
+    }, [navigate]);
 
     const handleAddReimbursement = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
     
         try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            setError('You need to log in first.');
-            return;
-        }
-
-        const response = await axios.post(
-            'http://127.0.0.1:8000/api/reimbursement', 
-            {
-            tanggal,
-            kategori,
-            deskripsi,
-            jumlah,
-            },
-            {headers: {Authorization: `Bearer ${token}`,},}
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        const response = await axios.post('http://127.0.0.1:8000/api/reimbursement',{tanggal,kategori,deskripsi,jumlah,}
         );
         
         console.log('Reimbursement added successfully:', response.data);

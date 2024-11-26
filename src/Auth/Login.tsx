@@ -3,6 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from "js-cookie";
 
+interface LoginResponse {
+  token: string
+  role: string
+}
+
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -15,11 +20,15 @@ const Login: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/login', {
+      const response = await axios.post<LoginResponse>('http://127.0.0.1:8000/api/login', {
         email,
         password,
-      });
-      Cookies.set("token", response.data.token);
+      },
+      { withCredentials: true }
+    );
+      const { token, role } = response.data
+      Cookies.set('token', token)
+      Cookies.set('role', role)
 
       navigate('/reimbursement');
     } catch (error) {

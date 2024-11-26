@@ -1,0 +1,27 @@
+{
+    "name": "Reimbursement",
+    "short_name": "Reimbursement",
+    "description": "Reimbursement PT Turbin Inovasi Indonesia",
+    "theme_color": "#8936FF",
+    "background_color": "#2EC6FE",
+    "icons": [
+      {
+        "src": "icon512_maskable.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "icon512_rounded.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "any",
+    "dir": "auto",
+    "lang": "en-US"
+  }
+  
