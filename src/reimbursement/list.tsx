@@ -72,12 +72,12 @@ const ReimbursementList: React.FC = () => {
         <thead>
           <tr className="w-full">
             <th className="p-4">Nama</th>
-            <th className="hidden md:block">Tanggal</th>
+            <th className="p-4">Tanggal</th>
             <th className="p-4">Kategori</th>
-            <th className="hidden md:block p-4">Deskripsi</th>
+            <th className="p-4">Deskripsi</th>
             <th className="p-4">Jumlah</th>
             <th className="p-4">Status</th>
-            <th className="hidden md:block p-4">Tanggal Approval</th>
+            <th className="p-4">Tanggal Approval</th>
             <th className="p-4">Approval By</th>
             {role === 'admin' && (
               <th className="p-4">Action</th>
@@ -88,12 +88,12 @@ const ReimbursementList: React.FC = () => {
           {reimbursements.map((reimbursement) => (
             <tr key={reimbursement.id} className="text-center">
               <td className="p-2">{reimbursement.user.name}</td>
-              <td className="p-2 hidden md:block">{reimbursement.tanggal}</td>
+              <td className="p-2">{reimbursement.tanggal}</td>
               <td className="p-2">{reimbursement.kategori}</td>
-              <td className="p-2 hidden md:block">{reimbursement.deskripsi || 'Tidak Ada Deskripsi'}</td>
+              <td className="p-2">{reimbursement.deskripsi || 'Tidak Ada Deskripsi'}</td>
               <td className="p-2">{reimbursement.jumlah}</td>
               <td className="p-2">{reimbursement.status}</td>
-              <td className="p-2 hidden md:block">{reimbursement.tanggal_approval || 'Belum Di Approve'}</td>
+              <td className="p-2">{reimbursement.tanggal_approval || 'Belum Di Approve'}</td>
               <td className="p-2">{reimbursement.approvalBy?.name || "Belum Di Approve"}</td>
               <td>
                 {role === 'admin' && (
