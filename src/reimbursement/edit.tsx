@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import Cookies from 'js-cookie'
+import BackButton from "../components/BackButton";
 
 const EditStatus: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [status, setStatus] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const token = Cookies.get("token");
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = Cookies.get('token')
+    if (!token) {
+        navigate('/');
+    }
+}, [navigate]);
+
+  useEffect(() => {
     const getReimbursement = async () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          return;
-        }
-        const response = await axios.get(`http://127.0.0.1:8000/api/reimbursement/${id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        const response = await axios.get(`http://127.0.0.1:8000/api/reimbursement/${id}`);
         setStatus(response.data.status);
     };
     getReimbursement();
@@ -35,24 +38,9 @@ const EditStatus: React.FC = () => {
       return;
     }
 
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return;
-    }
-
     try {
-      const response = await axios.put(
-        `http://127.0.0.1:8000/api/reimbursement/${id}`,
-        {
-          status,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      const response = await axios.put(`http://127.0.0.1:8000/api/reimbursement/${id}`,{status,});
       if (response.status === 200) {
         navigate('/reimbursement');
       }
@@ -67,7 +55,14 @@ const EditStatus: React.FC = () => {
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-100">
       <div className="w-full max-w-sm bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-6">Edit Status</h2>
+        <div className="flex">
+          <div className="absolute">
+            <BackButton />
+          </div>
+          <div className="w-full text-center">
+            <h2 className="text-2xl font-bold text-center mb-6">Edit Status</h2>
+          </div>
+        </div>
         <form onSubmit={handleUpdate}>
           {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
           <div className="mb-4">

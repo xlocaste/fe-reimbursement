@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import BackButton from '../components/BackButton';
 
 const AddReimbursement: React.FC = () => {
     const [tanggal, setTanggal] = useState<string>('')
@@ -42,7 +43,14 @@ const AddReimbursement: React.FC = () => {
     return (
         <div className="min-h-screen flex justify-center items-center bg-gray-100">
         <div className="w-full max-w-sm bg-white p-8 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-center mb-6">Add Reimbursement</h2>
+            <div className="flex">
+            <div className="absolute">
+                <BackButton />
+            </div>
+                <div className="w-full text-center">
+                    <h2 className="text-2xl font-bold text-center mb-6">Add Reimbursement</h2>
+                </div>
+            </div>
             {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
             <form onSubmit={handleAddReimbursement}>
             <div className="mb-4">
