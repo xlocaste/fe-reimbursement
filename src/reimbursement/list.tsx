@@ -32,8 +32,7 @@ type Reimbursement = {
 
 const ReimbursementList: React.FC = () => {
   const [reimbursements, setReimbursements] = useState<Reimbursement[]>([])
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [user, setUser] = useState<User | null>(null);
+  const [, setUser] = useState<User | null>(null);
   const [role, setRole] = useState<string>('');
   const token = Cookies.get("token");
   const navigate = useNavigate();
@@ -59,7 +58,7 @@ const ReimbursementList: React.FC = () => {
       setRole(userResponse.data.role);
     }
     fetchReimbursements()
-  }, [])
+  }, [token])
 
   return (
     <div className="p-10 w-full">

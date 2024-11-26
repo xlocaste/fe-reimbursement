@@ -26,7 +26,7 @@ const EditStatus: React.FC = () => {
         setStatus(response.data.status);
     };
     getReimbursement();
-  }, [id]);
+  }, [id, token]);
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
