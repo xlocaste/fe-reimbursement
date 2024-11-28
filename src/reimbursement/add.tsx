@@ -31,6 +31,13 @@ const AddReimbursement: React.FC = () => {
         );
         
         console.log('Reimbursement added successfully:', response.data);
+        const userName = response.data?.data?.user?.name || 'User';
+        if ('Notification' in window && Notification.permission === 'granted') {
+            new Notification('Berhasil!', {
+                body: `${userName} telah mendaftarkan reimbursement.`,
+                icon: '../public/icon512_rounded.png',
+            });
+        }
         navigate('/reimbursement');
         } catch (err) {
         setError('Failed to add reimbursement.');
