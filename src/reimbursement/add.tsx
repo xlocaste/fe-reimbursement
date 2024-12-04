@@ -82,16 +82,16 @@ const AddReimbursement: React.FC = () => {
                     className='w-full p-2 bg-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 items-center'
                     >
                         <option value="">Pilih Kategori</option>
-                        <option value="transportasi">Transportasi</option>
-                        <option value="akomodasi">Akomodasi</option>
-                        <option value="makan">Makan</option>
-                        <option value="peralatan_kantor">Peralatan Kantor</option>
-                        <option value="internet_komunikasi">Internet dan Komunikasi</option>
-                        <option value="biaya_medis">Biaya Medis</option>
-                        <option value="pelatihan_seminar">Pelatihan Seminar</option>
-                        <option value="hiburan_klien">Hiburan Klien</option>
-                        <option value="pengiriman_logistik">Pengiriman Logistik</option>
-                        <option value="lain_lain">Lain-lain</option>
+                        <option value="Transportasi">Transportasi</option>
+                        <option value="Akomodasi">Akomodasi</option>
+                        <option value="Makan">Makan</option>
+                        <option value="Peralatan Kantor">Peralatan Kantor</option>
+                        <option value="Internet Komunikasi">Internet dan Komunikasi</option>
+                        <option value="Biaya Media">Biaya Medis</option>
+                        <option value="Pelatihan Seminar">Pelatihan Seminar</option>
+                        <option value="Hiburan Klien">Hiburan Klien</option>
+                        <option value="Pengiriman Logistik">Pengiriman Logistik</option>
+                        <option value="Lain-lain">Lain-lain</option>
                 </select>
                 </div>
             </div>

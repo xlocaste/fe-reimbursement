@@ -44,6 +44,13 @@ const ReimbursementList: React.FC = () => {
     }
 }, [navigate]);
 
+  const formatRupiah = (angka: number): string => {
+    return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+    }).format(angka);
+  };
+
   useEffect(() => {
     const fetchReimbursements = async () => {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -90,7 +97,7 @@ const ReimbursementList: React.FC = () => {
               <td className="p-2">{reimbursement.tanggal}</td>
               <td className="p-2">{reimbursement.kategori}</td>
               <td className="p-2">{reimbursement.deskripsi || 'Tidak Ada Deskripsi'}</td>
-              <td className="p-2">{reimbursement.jumlah}</td>
+              <td className="p-2">{formatRupiah(reimbursement.jumlah)}</td>
               <td className="p-2">{reimbursement.status}</td>
               <td className="p-2">{reimbursement.tanggal_approval || 'Belum Di Approve'}</td>
               <td className="p-2">{reimbursement.approvalBy?.name || "Belum Di Approve"}</td>
